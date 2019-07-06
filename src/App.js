@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-// import Login from './components/auth/Login';
+import Login from './components/auth/Login';
 
 import { Layout, Menu, Icon, Avatar } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -17,9 +17,16 @@ class App extends Component {
     return (
       <Layout>
         <Header className="header">
-          <div className="logo" />
-          <h1 style={{ color: 'white' }}>Travel Xperience</h1>
-          <Avatar className="avatar" shape="square" size="large" icon="user" />
+          <div className="my-header">
+            <div className="logo" />
+            <h1 style={{ color: "white" }}>Travel Xperience</h1>
+            <Avatar
+              className="avatar"
+              shape="square"
+              size="large"
+              icon="user"
+            />
+          </div>
         </Header>
         <Layout>
           <Sider
@@ -28,7 +35,7 @@ class App extends Component {
             onCollapse={this.onCollapse}
           >
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-              <Menu.Item key="1">
+              <Menu.Item style={{ margin: 'auto' }} key="1">
                 <Icon type="pie-chart" />
                 <span>Option 1</span>
               </Menu.Item>
@@ -60,7 +67,7 @@ class App extends Component {
                 height: "calc(79vh)" // TODO: revisar para que quede al 100% sin su padding (¿funciona 'calc'?)
               }}
             >
-              Content
+              <Login></Login>
             </Content>
           </Layout>
         </Layout>
