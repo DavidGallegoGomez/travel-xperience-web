@@ -17,6 +17,26 @@ class AuthStore extends Component {
   isAuthenticated = () => {
     return this.state.user && this.state.user.username
   }
+
+  render() {
+    return(
+      <AuthContext.Provider value= {{
+        user: this.state.user,
+        onUserChange: this.handleUserChange,
+        isAuthenticated: this.isAuthenticated
+      }} >
+        { this.props.children }
+      </AuthContext.Provider>
+    );
+  }
 }
 
-export { AuthStore }
+const withAuthConsumer = (WrappedComponent) => {
+  return() => (
+    <AuthContext.Consumer>
+      { (props) => (<WrappedComponent {...props} />) }
+    </AuthContext.Consumer>
+  )
+}
+
+export { AuthStore, AuthContext, withAuthConsumer }

@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import { Switch, Route } from 'react-router-dom';
 import "./App.css";
 import Login from './components/auth/Login';
+import Profile from './components/auth/Profile';
+import Register from './components/auth/Register';
+import Home from './components/misc/Home';
+import PrivateRoute from './guards/PrivateRoute';
 
 import { Layout, Menu, Icon, Avatar } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -67,7 +72,15 @@ class App extends Component {
                 height: "calc(79vh)" // TODO: revisar para que quede al 100% sin su padding (¿funciona 'calc'?)
               }}
             >
-              <Login></Login>
+              
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                {/* <PrivateRoute exact path="/profile" component={Profile} /> */}
+                <Route exact path="/profile" component={Profile} />
+              </Switch>
+
             </Content>
           </Layout>
         </Layout>
