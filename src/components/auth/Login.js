@@ -2,91 +2,156 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import authService from "../../services/AuthService";
 import { withAuthConsumer } from "../../contexts/AuthStore";
-import { Form, Icon, Input, Button } from "antd";
 
-class NormalLoginForm extends Component {
-  state = { 
+const validations = {
+  username: value => {
+    let message;
+    if (!value) {
+      message = "UserName is required";
+    }
+    return message;
+  },
+  password: value => {
+    let message;
+    if (!value) {
+      message = "Password is required";
+    }
+    return message;
+  }
+};
+
+class Login extends Component {
+  state = {
     user: {
-      username: '',
-      password: ''
+      username: "",
+      password: ""
     },
-    isAuthenticated: false };
+    errors: {},
+    touch: {},
+    isAuthenticated: false
+  };
 
-  handleChange = e => {
-    const { name, value } = e.target;
+  handleChange = event => {
+    const { name, value } = event.target;
     this.setState({
       user: {
         ...this.state.user,
         [name]: value
-      }
-    })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-        authService.authenticate(this.state.user)
-          .then(user => {
-            this.setState({ isAuthenticated: true });
-            console.log(this.state);
-          });
+      },
+      errors: {
+        ...this.state.errors,
+        [name]: validations[name] && validations[name](value)
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    const { isAuthenticated } = this.state;
+  handleBlur = event => {
+    const { name } = event.target;
+    this.setState({
+      touch: {
+        ...this.state.touch,
+        [name]: true
+      }
+    });
+  };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    if (this.isValid()) {
+      authService.authenticate(this.state.user).then(
+        user => {
+          this.setState({ isAuthenticated: true }, () => {
+            this.props.onUserChange(user);
+          });
+        },
+        error => {
+          const { message, errors } = error.response.data;
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              ...errors,
+              password: !errors && message
+            }
+          });
+        }
+      );
+    }
+  };
+
+  isValid = () => {
+    return !Object.keys(this.state.user).some(attr => this.state.errors[attr]);
+  };
+
+  render() {
+    const { isAuthenticated, errors, user, touch } = this.state;
     if (isAuthenticated) {
       return <Redirect to="/profile" />;
     }
 
     return (
-      <Form
-        onSubmit={this.handleSubmit}
-        className="login-form"
-        style={{ maxWidth: "300" }}
-      >
-        <Form.Item>
-          {getFieldDecorator("username", {
-            rules: [{ required: true, message: "Please input your Username!" }]
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              placeholder="Username" name="username" onChange={this.handleChange}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator("password", {
-            rules: [{ required: true, message: "Please input your Password!" }]
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password" placeholder="Password" name="password" onChange={this.handleChange}
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            Login
-          </Button>
-          <p>
-            Or <Link to="/register">register now!</Link>{" "}
-          </p>
-        </Form.Item>
-      </Form>
+      <div className="box mx-auto">
+        <div className="row">
+          <div className="col-6">
+            <h3>Log in</h3>
+            <form id="login-form" className="mt-4" onSubmit={this.handleSubmit}>
+            
+              <div className="form-group">
+                <label>username</label>
+                <input
+                  type="username"
+                  name="username"
+                  className={`form-control ${
+                    touch.username && errors.username ? "is-invalid" : ""
+                  }`}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur}
+                  value={user.username}
+                />
+                <div className="invalid-feedback">{errors.username}</div>
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className={`form-control ${
+                    touch.password && errors.password ? "is-invalid" : ""
+                  }`}
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur}
+                  value={user.password}
+                />
+                <div className="invalid-feedback">{errors.password}</div>
+              </div>
+            </form>
+            <p className="mt-4">
+              <small>
+                If you don't have an account yet, you can create your account{" "}
+                <Link to="/register">here</Link>
+              </small>
+            </p>
+          </div>
+          <div className="col-6 pt-4">
+            <h5>Hello!!</h5>
+            <p className="lead mb-5">Awesome to hace at IronProfile again!</p>
+            <p className="mb-2">
+              <small>
+                If you signup, you agree with all our terms and conditions where
+                we can do whatever we want with the data!
+              </small>
+            </p>
+            <button
+              className="btn btn-white"
+              form="login-form"
+              type="submit"
+              disabled={!this.isValid()}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 }
-
-const Login = Form.create({ name: "normal_login" })(NormalLoginForm);
-
 export default withAuthConsumer(Login);

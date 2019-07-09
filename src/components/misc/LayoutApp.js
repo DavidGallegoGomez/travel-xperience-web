@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import { Switch, Route } from 'react-router-dom';
-import "./App.css";
-import Login from './components/auth/Login';
-import Profile from './components/auth/Profile';
-import Register from './components/auth/Register';
-import Home from './components/misc/Home';
-import PrivateRoute from './guards/PrivateRoute';
+import HeaderApp from './HeaderApp';
 
 import { Layout, Menu, Icon } from "antd";
-import HeaderApp from "./components/misc/HeaderApp";
 const { Content, Sider } = Layout;
 
-class App extends Component {
+class LayoutApp extends Component {
   state = { collapsed: true };
 
   onCollapse = collapsed => {
@@ -21,8 +14,11 @@ class App extends Component {
 
   render() {
     return (
+      // TODO: Meter esto en un componente Header
       <Layout>
+        
         <HeaderApp />
+
         <Layout>
           <Sider
             collapsible
@@ -30,25 +26,25 @@ class App extends Component {
             onCollapse={this.onCollapse}
           >
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-              <Menu.Item style={{ margin: 'auto' }} key="1">
+              <Menu.Item style={{ margin: "auto" }} key="1">
                 <Icon type="pie-chart" />
-                <span>Option 1</span>
+                <span>Busco dónde ir</span>
               </Menu.Item>
               <Menu.Item key="2">
                 <Icon type="desktop" />
-                <span>Option 2</span>
+                <span>Reservo mi viaje</span>
               </Menu.Item>
               <Menu.Item key="3">
                 <Icon type="user" />
-                <span>User</span>
+                <span>Preparo mi viaje</span>
               </Menu.Item>
               <Menu.Item key="4">
                 <Icon type="team" />
-                <span>Team</span>
+                <span>Disfruto en mi destino</span>
               </Menu.Item>
               <Menu.Item key="5">
                 <Icon type="file" />
-                <span>File</span>
+                <span>Mis recuerdos</span>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -63,13 +59,7 @@ class App extends Component {
               }}
             >
               
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <PrivateRoute exact path="/profile" component={Profile} />
-                <PrivateRoute exact path="/header" component={HeaderApp} />
-              </Switch>
+              {/* TODO: children props HERE!!! */}
 
             </Content>
           </Layout>
@@ -79,4 +69,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default LayoutApp;
