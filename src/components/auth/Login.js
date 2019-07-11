@@ -94,7 +94,6 @@ class Login extends Component {
           <div className="col-6">
             <h3>Log in</h3>
             <form id="login-form" className="mt-4" onSubmit={this.handleSubmit}>
-            
               <div className="form-group">
                 <label>username</label>
                 <input
@@ -128,16 +127,6 @@ class Login extends Component {
               <small>
                 If you don't have an account yet, you can create your account{" "}
                 <Link to="/register">here</Link>
-              </small>
-            </p>
-          </div>
-          <div className="col-6 pt-4">
-            <h5>Hello!!</h5>
-            <p className="lead mb-5">Awesome to hace at IronProfile again!</p>
-            <p className="mb-2">
-              <small>
-                If you signup, you agree with all our terms and conditions where
-                we can do whatever we want with the data!
               </small>
             </p>
             <button

@@ -10,9 +10,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /*
-  background-color: blueviolet;
-  */
+  background-color: rgba(60, 156, 230, 0.6);
+  height: auto;
 }
 .ant-layout-sider-children {
   height: 70vh;
@@ -27,4 +26,90 @@
 }
 .login-form-button {
   width: 100%;
+}
+
+.box  {
+  background-image: url('/oval-bg.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 717px;
+  height: 458px;
+  padding: 20px;
+  padding: 40px 50px;
+  position: relative;
+}
+
+.box h3 {
+  color: #638165;
+  font-weight: 400;
+}
+
+.box p {
+  font-weight: 100;
+}
+
+.box .btn {
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  max-width: 200px;
+  width: 100%;
+}
+
+.box .btn-green {
+  background-color: #c1dfc4;
+  border-color: #c1dfc4;
+  color: #638165;
+}
+
+.box .btn-white {
+  background-color: #FFFFFF ;
+  border-color: #FFFFFF;
+  color: #638165;
+}
+
+.box .col-6 + .col-6 {
+  padding-left: 80px;
+}
+
+.box small {
+  font-weight: 100;
+  line-height: 1.0;
+}
+
+.box .form-group label {
+  font-weight: 100;
+  font-size: 12px;
+  margin-bottom: 1px;
+}
+
+.box .form-group input,
+.box .form-group select {
+  background-color: #F1F1F1F1;
+  border-color: #F1F1F1F1;
+  border-radius: 3px;
+  height: 35px; 
+  font-size: 15px;
+}
+
+.box img,
+.box .avatar {
+  max-width: 200px;
+  width: 100%;
+}
+
+.box input[type="file"] {
+  display: none;
+}
+
+.box .form-group {
+  margin-bottom: 5px;
+}
+
+.box .btn-logout {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: darkred;
+  cursor: pointer;
 }

@@ -60,6 +60,7 @@ class LayoutApp extends Component {
             >
               
               {/* TODO: children props HERE!!! */}
+              { this.props.children }
 
             </Content>
           </Layout>
