@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 // TODO: Quitar bootstrap y fontawesome si sólo se usa antd
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import "antd/dist/antd.css";
 import './index.css';
 
 import App from './App';

@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* TODO: gradiente */
+  background-color: #eff3f4; position: relative; width: 100%; height: 100%;
+  background-image: linear-gradient(-90deg, #ddf1fa, #4eb8dd);
 }
 
 code {
@@ -12,3 +16,111 @@ code {
     monospace;
 }
 
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+}
+.my-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(60, 156, 230, 0.6);
+  height: 75px;
+}
+
+.box  {
+  /* background-image: url('/oval-bg.png');
+  background-repeat: no-repeat;
+  background-size: contain; */
+  padding: 40px;
+  
+  position: absolute; top: 35vh; left: 50vw; transform: translate(-50%,-50%);
+	display: block; width: 100%; max-width: 300px; background-color: #FFF;
+	margin: 0; box-sizing: content-box; border: solid 1px #DDD; border-radius: .5em;
+}
+
+.box h3 {
+  color: #217093;
+  font-weight: 400;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.box p {
+  font-weight: 100;
+}
+
+.box .btn {
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  max-width: 200px;
+  width: 100%;
+}
+
+.box .btn-green {
+  background-color: #c1dfc4;
+  border-color: #c1dfc4;
+  color: #638165;
+}
+
+.box .btn-white {
+  background-color: #FFFFFF ;
+  border-color: #FFFFFF;
+  color: #638165;
+}
+
+.box small {
+  font-weight: 300;
+  line-height: 1.0;
+}
+
+.box .form-group label {
+  font-weight: 300;
+  font-size: 14px;
+  margin-bottom: 2px;
+  color: #217093;
+}
+
+.box .form-group input {
+  background-color: #eff3f4;
+  border-color: #ddf1fa;
+  border-radius: 3px;
+  height: 35px; 
+  font-size: 15px;
+}
+
+.box img,
+.box .avatar {
+  max-width: 200px;
+  width: 100%;
+}
+
+.box .form-group {
+  margin-bottom: 5px;
+}
+
+.box .btn-logout {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: darkred;
+  cursor: pointer;
+}
+
+.row {
+  justify-content: center;
+}
+
+.tooltip {
+  position: absolute;
+  color: #fff;
+  padding: 10px;
+  background: rgba(0,0,0,0.8);
+  transform: translate3d(-50%, -50%, 0);
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: 1000;
+}
