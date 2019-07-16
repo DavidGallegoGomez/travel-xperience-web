@@ -6,7 +6,7 @@ import { Layout, Menu, Icon } from "antd";
 const { Content, Sider } = Layout;
 
 class LayoutApp extends Component {
-  state = { collapsed: false, marginLeftContent: "200px" };
+  state = { collapsed: true, marginLeftContent: "80px" };
 
   onCollapse = collapsed => {
     console.log(collapsed);

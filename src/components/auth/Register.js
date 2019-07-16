@@ -150,7 +150,7 @@ class Register extends Component {
                 validationClassName={this.getValidationClassName("email")}
               />
 
-<FormField
+              <FormField
                 label="Password"
                 name="password"
                 onBlur={this.handleBlur}
@@ -162,16 +162,18 @@ class Register extends Component {
                 validationClassName={this.getValidationClassName("password")}
               />
               <div className="text-center">
-              <button
-                className={`btn ${
-                  !this.isValid() ? "btn-outline-danger" : "btn-outline-primary"
-                }`}
-                form="register-form"
-                type="submit"
-                disabled={!this.isValid()}
-              >
-                Create the Account
-              </button>
+                <button
+                  className={`btn ${
+                    !this.isValid()
+                      ? "btn-outline-danger"
+                      : "btn-outline-primary"
+                  }`}
+                  form="register-form"
+                  type="submit"
+                  disabled={!this.isValid()}
+                >
+                  Create the Account
+                </button>
               </div>
             </form>
           </div>
