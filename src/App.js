@@ -10,6 +10,7 @@ import Reservo from "./components/Reservo";
 import Preparo from "./components/Preparo";
 import Disfruto from "./components/Disfruto";
 import Recuerdo from "./components/Recuerdo";
+import SearchCities from "./components/SearchCities";
 
 class App extends Component {
   state = { collapsed: true };
@@ -32,6 +33,7 @@ class App extends Component {
         <PrivateRoute exact path="/preparo" component={Preparo} />
         <PrivateRoute exact path="/disfruto" component={Disfruto} />
         <PrivateRoute exact path="/recuerdo" component={Recuerdo} />
+        <PrivateRoute exact path="/search-cities" component={SearchCities} />
       </Switch>
     );
   }

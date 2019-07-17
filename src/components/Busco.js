@@ -132,15 +132,16 @@ class Busco extends Component {
 
     return (
       <LayoutApp>
-        <div className="row">
-          <div className="col-12">
-            <h3 style={{ textAlign: "center" }}>Busco dónde ir</h3>
+        <h3 style={{ textAlign: "center" }}>Busco dónde ir</h3>
             <form
               id="register-form"
               className="mt-4"
               onSubmit={this.handleSubmit}
             >
-              <div className="form-group">
+
+<div className="row">
+          <div className="col">
+          <div className="form-group">
                 <label>OriginCountry</label>
                 <select
                   className={`form-control ${
@@ -157,8 +158,9 @@ class Busco extends Component {
                 </select>
                 <div className="invalid-feedback">{errors.originCountry}</div>
               </div>
-
-              {errors.originCountry ? (
+          </div>
+          <div className="col">
+          {errors.originCountry ? (
                 <FormField
                   disabled
                   label="OriginCity"
@@ -188,8 +190,12 @@ class Busco extends Component {
                   )}
                 />
               )}
-
-              <div className="form-group">
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col">
+          <div className="form-group">
                 <label>DestinationCountry</label>
                 <select
                   className={`form-control ${
@@ -208,8 +214,9 @@ class Busco extends Component {
                   {errors.destinationCountry}
                 </div>
               </div>
-
-              {errors.destinationCountry ? (
+          </div>
+          <div className="col">
+          {errors.destinationCountry ? (
                 <FormField
                   disabled
                   label="DestinationCity"
@@ -239,8 +246,12 @@ class Busco extends Component {
                   )}
                 />
               )}
-
-              <FormField
+          </div>
+        </div>
+        
+        <div className="row">
+          <div className="col">
+          <FormField
                 label="DepartureDate"
                 name="departureDate"
                 onBlur={this.handleBlur}
@@ -253,8 +264,9 @@ class Busco extends Component {
                   "departureDate"
                 )}
               />
-
-              <FormField
+          </div>
+          <div className="col">
+          <FormField
                 label="ReturnDate"
                 name="returnDate"
                 onBlur={this.handleBlur}
@@ -265,8 +277,10 @@ class Busco extends Component {
                 type="date"
                 validationClassName={this.getValidationClassName("returnDate")}
               />
-
-              <div className="text-center">
+          </div>
+        </div>         
+  
+              <div className="text-center" style={{ paddingTop: '15px' }}>
                 <button
                   className={`btn ${
                     !this.isValid()
@@ -281,8 +295,6 @@ class Busco extends Component {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
       </LayoutApp>
     );
   }
