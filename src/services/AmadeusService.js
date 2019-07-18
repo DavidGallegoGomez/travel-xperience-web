@@ -10,24 +10,25 @@ const getCities = query => http.get("/amadeus/cities", {
 
 const getFlight = query => http.get("/amadeus/flight", {
       params: {
-        keyword: query,
-        countryCode: "ES"
+        origin: query.origin,
+        destination: query.destination,
+        departureDate: query.departureDate,
+        returnDate: query.returnDate
       }
     })
     .then(res => Promise.resolve(res.data));
 
-const getCities = query => http.get("/amadeus/cities", {
+const getHotel = query => http.get("/amadeus/hotel", {
       params: {
-        keyword: query,
-        countryCode: "ES"
+        cityCode: query
       }
     })
     .then(res => Promise.resolve(res.data));
 
-const getCities = query => http.get("/amadeus/cities", {
+const getPOI = query => http.get("/amadeus/poi", {
       params: {
-        keyword: query,
-        countryCode: "ES"
+        latitude: query.latitude,
+        longitude: query.longitude
       }
     })
     .then(res => Promise.resolve(res.data));
@@ -35,4 +36,6 @@ const getCities = query => http.get("/amadeus/cities", {
 export default {
   getCities,
   getFlight,
+  getHotel,
+  getPOI
 };
