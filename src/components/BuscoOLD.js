@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LayoutApp from "./misc/LayoutApp";
 import { withAuthConsumer } from "../contexts/AuthStore";
 import FormField from "./misc/FormField";
-import countries from "../data/countries.json";
+import countries from "../../data/countries.json";
 import amadeusService from '../services/AmadeusService';
 
 const validations = {

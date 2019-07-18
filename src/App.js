@@ -5,7 +5,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./guards/PrivateRoute";
 // import Road from "./components/Road";
-import Busco from "./components/Busco";
+import Busco from "./components/busco/Busco";
 import Reservo from "./components/Reservo";
 // import Preparo from "./components/Preparo";
 import Disfruto from "./components/Disfruto";
