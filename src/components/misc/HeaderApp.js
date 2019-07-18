@@ -8,13 +8,6 @@ const { Header } = Layout;
 
 //const HeaderApp = () => (
 class HeaderApp extends Component {
-  state = {
-    user: {
-      username: "",
-      avatarURL: ""
-    }
-  };
-
   handleLogout = () => {
     authService.logout().then(() => {
       this.setState({ logout: true });
@@ -22,18 +15,8 @@ class HeaderApp extends Component {
     });
   };
 
-  componentWillReceiveProps(nextProps) {
-    authService.getProfile().then(
-      user => {
-        this.setState({ user: { ...this.state.user, ...user }, logout: false });
-        console.log(user);
-      },
-      error => console.error(error)
-    );
-  }
-
   render() {
-    const { user } = this.state;
+    const { user } = this.props;
 
     return (
       <Header className="header my-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>

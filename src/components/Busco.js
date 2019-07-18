@@ -3,6 +3,7 @@ import LayoutApp from "./misc/LayoutApp";
 import { withAuthConsumer } from "../contexts/AuthStore";
 import FormField from "./misc/FormField";
 import countries from "../data/countries.json";
+import amadeusService from '../services/AmadeusService';
 
 const validations = {
   originCountry: value => {
@@ -33,6 +34,22 @@ const validations = {
     }
     return message;
   },
+  
+  originCityDrop: value => {
+    let message;
+    if (!value) {
+      message = "Origin city is required";
+    }
+    return message;
+  },
+  destinationCityDrop: value => {
+    let message;
+    if (!value) {
+      message = "Destination city is required";
+    }
+    return message;
+  },
+
   departureDate: value => {
     let message;
     if (!value) {
@@ -59,20 +76,92 @@ class Busco extends Component {
       originCity: "",
       destinationCountry: "",
       destinationCity: "",
+
+      originCityDrop: "",
+      destinationCityDrop: "",
+
       departureDate: "",
       returnDate: ""
     },
+    queryOrigin: {
+      keyword: "",
+      countryCode: ""
+    },
+    queryDestination: {
+      keyword: "",
+      countryCode: ""
+    },
+
+    resultsOrigin: [],
+    resultsDestination: [],
+    
     errors: {
       originCountry: true,
       originCity: true,
       destinationCountry: true,
       destinationCity: true,
+
+      originCityDrop: true,
+      destinationCityDrop: true,
+
       departureDate: true,
       returnDate: true
     },
     touch: {}
   };
+  /////////
 
+  getInfoOrigin = () => {
+    // amadeusService.getCities(this.state.query.keyword).then(
+    amadeusService.getCities(this.state.queryOrigin).then(
+      data => {
+        console.log(data);
+        this.setState({ resultsOrigin: data });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  };
+
+  handleInputChangeOrigin = (event) => {
+    // const { name, value } = event.target; //DIEGO!!!
+    // if (name === 'originCity')
+    this.setState({ queryOrigin: this.search.value },
+      () => {
+        // if (this.state.query.keyword && this.state.query.keyword.length > 2) {
+        if (this.state.queryOrigin && this.state.queryOrigin.length > 2) {
+          this.getInfoOrigin();
+        }
+      }
+    );
+  };
+  
+  getInfoDest = () => {
+    // amadeusService.getCities(this.state.query.keyword).then(
+    amadeusService.getCities(this.state.queryDestination).then(
+      data => {
+        console.log(data);
+        this.setState({ resultsDestination: data });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  };
+  
+  handleInputChangeDest = (event) => {
+    this.setState({ queryDestination: this.search.value },
+      () => {
+        // if (this.state.query.keyword && this.state.query.keyword.length > 2) {
+        if (this.state.queryDestination && this.state.queryDestination.length > 2) {
+          this.getInfoDest();
+        }
+      }
+    );
+  };
+
+  /////////
   handleChange = event => {
     const { name, value } = event.target;
     const isValid = validations[name] && validations[name](value);
@@ -114,6 +203,7 @@ class Busco extends Component {
     event.preventDefault();
     if (this.isValid()) {
       console.log(this.state.data);
+      this.props.onSearch(this.state.data);
     }
   };
 
@@ -133,15 +223,10 @@ class Busco extends Component {
     return (
       <LayoutApp>
         <h3 style={{ textAlign: "center" }}>Busco dónde ir</h3>
-            <form
-              id="register-form"
-              className="mt-4"
-              onSubmit={this.handleSubmit}
-            >
-
-<div className="row">
-          <div className="col">
-          <div className="form-group">
+        <form id="register-form" className="mt-4" onSubmit={this.handleSubmit}>
+          <div className="row">
+            <div className="col">
+              <div className="form-group">
                 <label>OriginCountry</label>
                 <select
                   className={`form-control ${
@@ -158,9 +243,9 @@ class Busco extends Component {
                 </select>
                 <div className="invalid-feedback">{errors.originCountry}</div>
               </div>
-          </div>
-          <div className="col">
-          {errors.originCountry ? (
+            </div>
+            <div className="col">
+              {errors.originCountry ? (
                 <FormField
                   disabled
                   label="OriginCity"
@@ -181,7 +266,11 @@ class Busco extends Component {
                   name="originCity"
                   onBlur={this.handleBlur}
                   value={data.originCity}
-                  onChange={this.handleChange}
+                  // onChange={this.handleChange}
+
+                  // ref={input => (this.search = input)}
+                  onChange={this.handleInputChangeOrigin}
+
                   touch={touch.originCity}
                   error={errors.originCity}
                   type="text"
@@ -189,13 +278,16 @@ class Busco extends Component {
                     "originCity"
                   )}
                 />
+
+                
+
               )}
+            </div>
           </div>
-        </div>
-        
-        <div className="row">
-          <div className="col">
-          <div className="form-group">
+
+          <div className="row">
+            <div className="col">
+              <div className="form-group">
                 <label>DestinationCountry</label>
                 <select
                   className={`form-control ${
@@ -214,9 +306,9 @@ class Busco extends Component {
                   {errors.destinationCountry}
                 </div>
               </div>
-          </div>
-          <div className="col">
-          {errors.destinationCountry ? (
+            </div>
+            <div className="col">
+              {errors.destinationCountry ? (
                 <FormField
                   disabled
                   label="DestinationCity"
@@ -246,12 +338,54 @@ class Busco extends Component {
                   )}
                 />
               )}
+            </div>
           </div>
-        </div>
-        
-        <div className="row">
-          <div className="col">
-          <FormField
+
+          <div className="row">
+            <div className="col">
+              <div className="form-group">
+                <label>OriginCityDrop</label>
+                <select
+                  className={`form-control ${
+                    touch.originCityDrop && errors.originCityDrop
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  name="originCityDrop"
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur}
+                  value={data.originCityDrop}
+                >
+                  {countriesOpts}
+                </select>
+                <div className="invalid-feedback">{errors.originCityDrop}</div>
+              </div>
+            </div>
+
+            <div className="col">
+              <div className="form-group">
+                <label>DestinationCityDrop</label>
+                <select
+                  className={`form-control ${
+                    touch.destinationCityDrop && errors.destinationCityDrop
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  name="destinationCityDrop"
+                  onChange={this.handleChange}
+                  onBlur={this.handleBlur}
+                  value={data.destinationCityDrop}
+                >
+                  {countriesOpts}
+                </select>
+                <div className="invalid-feedback">{errors.destinationCityDrop}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col">
+              <FormField
                 label="DepartureDate"
                 name="departureDate"
                 onBlur={this.handleBlur}
@@ -264,9 +398,9 @@ class Busco extends Component {
                   "departureDate"
                 )}
               />
-          </div>
-          <div className="col">
-          <FormField
+            </div>
+            <div className="col">
+              <FormField
                 label="ReturnDate"
                 name="returnDate"
                 onBlur={this.handleBlur}
@@ -277,24 +411,22 @@ class Busco extends Component {
                 type="date"
                 validationClassName={this.getValidationClassName("returnDate")}
               />
+            </div>
           </div>
-        </div>         
-  
-              <div className="text-center" style={{ paddingTop: '15px' }}>
-                <button
-                  className={`btn ${
-                    !this.isValid()
-                      ? "btn-outline-danger"
-                      : "btn-outline-primary"
-                  }`}
-                  form="register-form"
-                  type="submit"
-                  disabled={!this.isValid()}
-                >
-                  Search
-                </button>
-              </div>
-            </form>
+
+          <div className="text-center" style={{ paddingTop: "15px" }}>
+            <button
+              className={`btn ${
+                !this.isValid() ? "btn-outline-danger" : "btn-outline-primary"
+              }`}
+              form="register-form"
+              type="submit"
+              disabled={!this.isValid()}
+            >
+              Search
+            </button>
+          </div>
+        </form>
       </LayoutApp>
     );
   }
