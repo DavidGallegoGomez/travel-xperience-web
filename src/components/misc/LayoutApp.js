@@ -32,25 +32,25 @@ class LayoutApp extends Component {
             <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
               
               <Menu.Item style={{ margin: "auto" }} key="1">
-                <Icon type="pie-chart" />
+                <Icon type="file-search" />
                 <span>Busco dónde ir</span>
                 <Link to="/busco"></Link>
               </Menu.Item>
               
               <Menu.Item key="2">
-                <Icon type="desktop" />
+                <Icon type="rocket" />
                 <span>Mi vuelo</span>
                 <Link to="/reservo"></Link>
               </Menu.Item>
               
               <Menu.Item key="3">
-                <Icon type="user" />
+                <Icon type="home" />
                 <span>Alojamiento</span>
                 <Link to="/alojamiento"></Link>
               </Menu.Item>
               
               <Menu.Item key="4">
-                <Icon type="team" />
+                <Icon type="camera" />
                 <span>Disfruto en destino</span>
                 <Link to="/disfruto"></Link>
               </Menu.Item>

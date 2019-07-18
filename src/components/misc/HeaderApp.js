@@ -21,8 +21,8 @@ class HeaderApp extends Component {
     return (
       <Header className="header my-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
         <div className="logo" />
-        <h2 style={{ color: "white" }}>Travel Xperience</h2>
-        <h3 style={{ color: "blue" }}>Hi, {user.username}!!!</h3>
+        <h3 style={{ color: "white" }}>Travel Xperience</h3>
+        <h5 style={{ color: "blue" }}>Hola {user.username}!!!</h5>
         {/* <Avatar
           className="avatar"
           src={user.avatarURL}

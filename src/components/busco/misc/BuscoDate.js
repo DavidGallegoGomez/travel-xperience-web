@@ -48,6 +48,10 @@ class BuscoDate extends Component {
     return !Object.keys(this.state.data).some(attr => this.state.errors[attr]);
   };
 
+  handleChange = (event) => {
+    this.props.onChange(event);
+  };
+
   render() {
     const { errors, data, touch } = this.state;
 
@@ -59,7 +63,8 @@ class BuscoDate extends Component {
             name="departureDate"
             onBlur={this.handleBlur}
             value={data.departureDate}
-            onChange={this.props.onChange}
+            // onChange={this.props.onChange}
+            onChange={this.handleChange}
             touch={touch.departureDate}
             error={errors.departureDate}
             type="date"

@@ -3,7 +3,6 @@ import amadeusService from "../services/AmadeusService";
 
 class SearchCities extends Component {
   state = {
-    //query: "",
     query: {
       keyword: "",
       countryCode: "US"
@@ -24,13 +23,11 @@ class SearchCities extends Component {
   };
 
   handleInputChange = () => {
-    // this.setState({ query: this.search.value },
     this.setState({ query: {
       ...this.state.query,
       keyword: this.search.value  
     } },
       () => {
-        // if (this.state.query.keyword && this.state.query.keyword.length > 2) {
         if (this.state.query.keyword && this.state.query.keyword.length > 2) {
           this.getInfo();
         }
