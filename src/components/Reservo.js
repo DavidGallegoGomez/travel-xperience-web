@@ -77,7 +77,11 @@ class Reservo extends Component {
             }}
           >
             <Card 
-              title={ this.vuelo.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode }
+              title={ 
+                this.vuelo.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode
+                + ' - ' +
+                this.vuelo.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode
+              }
               style={{ width: 400 }}>
               <p>Salida: { this.vuelo.offerItems[0].services[0].segments[0].flightSegment.departure.at }</p>
               <p>Terminal: { this.vuelo.offerItems[0].services[0].segments[0].flightSegment.departure.terminal }</p>
@@ -94,7 +98,11 @@ class Reservo extends Component {
             }}
           >
             <Card 
-              title={ this.vuelo.offerItems[0].services[1].segments[0].flightSegment.departure.iataCode }
+              title={ 
+                this.vuelo.offerItems[0].services[1].segments[0].flightSegment.departure.iataCode
+                + ' - ' +
+                this.vuelo.offerItems[0].services[1].segments[0].flightSegment.arrival.iataCode
+              }
               style={{ width: 400 }}>
               <p>Salida: { this.vuelo.offerItems[0].services[1].segments[0].flightSegment.departure.at }</p>
               <p>Terminal: { this.vuelo.offerItems[0].services[1].segments[0].flightSegment.departure.terminal }</p>

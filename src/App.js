@@ -40,8 +40,8 @@ class App extends Component {
         <PrivateRoute exact path="/busco" component={() => <Busco onSearch={this.onSearch}/>} />
         <PrivateRoute exact path="/reservo" component={() => <Reservo search={this.state.search}/>} />
         {/* <PrivateRoute exact path="/preparo" component={Preparo} /> */}
-        <PrivateRoute exact path="/alojamiento" component={Alojo} />
-        <PrivateRoute exact path="/disfruto" component={Disfruto} />
+        <PrivateRoute exact path="/alojamiento" component={() => <Alojo search={this.state.search}/>} />
+        <PrivateRoute exact path="/disfruto" component={() => <Disfruto search={this.state.search}/>} />
         {/* <PrivateRoute exact path="/recuerdo" component={Recuerdo} /> */}
         <PrivateRoute exact path="/search-cities" component={SearchCities} />
       </Switch>
