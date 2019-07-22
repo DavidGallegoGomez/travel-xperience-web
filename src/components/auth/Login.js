@@ -89,7 +89,7 @@ class Login extends Component {
 
     if (isAuthenticated) {
       // return <Redirect to="/profile" />;
-      return <Redirect to="/busco" />;
+      return <Redirect to="/busco-new" />;
     }
 
     return (

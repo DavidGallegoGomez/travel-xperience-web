@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import LayoutApp from "./misc/LayoutApp";
 import { withAuthConsumer } from "../contexts/AuthStore";
 import { Card } from "antd";
+import amadeusService from "../services/AmadeusService";
 
 class Disfruto extends Component {
-  
-  poi = {
+  state = {
+  poi : {
     "data": [
         {
             "name": "Palau de la Música Catalana",
@@ -99,10 +100,36 @@ class Disfruto extends Component {
             ]
         }
     ]
-}
+},
+// TODO
+    // query: {
+    //   destinationCity: this.props.search.destinationCity
+    //   latitude: this.props.search.latitude,
+    //   longitude: this.props.search.longitude
+    // },
+
+    results: []
+  }
+
+  getFun = () => {
+    amadeusService.getPOI(this.state.query).then(
+      poi => {
+        console.log(poi);
+        this.setState({ results: poi });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  };
   
   render() {
-    const poiOpts = this.poi.data.map(poi => (
+    const { poi } = this.state;
+
+    // TODO
+    // this.getFun();
+
+    const poiOpts = poi.data.map(poi => (
       <div key={poi.name} style={{ padding: "20px", display: "flex", justifyContent: "center" }} >
         <Card title={poi.name} style={{ width: 300 }}>
           <p>Categoría: {poi.category}</p>

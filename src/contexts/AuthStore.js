@@ -5,8 +5,13 @@ const AuthContext = React.createContext();
 
 class AuthStore extends Component {
   state = {
-    user: JSON.parse( localStorage.getItem(CURRENT_USER_KEY) || '{}' )
+    user: JSON.parse( localStorage.getItem(CURRENT_USER_KEY) || '{}' ),
+  // search: {} // DGG
   }
+
+  // onSearch = (searchDetails) => { // DGG
+  //   this.setState({ search: searchDetails })
+  // }
 
   handleUserChange = (user) => {
     this.setState({ user: user })
@@ -23,7 +28,8 @@ class AuthStore extends Component {
       <AuthContext.Provider value= {{
         user: this.state.user,
         onUserChange: this.handleUserChange,
-        isAuthenticated: this.isAuthenticated
+        isAuthenticated: this.isAuthenticated,
+      // search: this.state.search // DGG
       }} >
         { this.props.children }
       </AuthContext.Provider>

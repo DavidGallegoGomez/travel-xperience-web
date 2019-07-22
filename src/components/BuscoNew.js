@@ -4,6 +4,7 @@ import { withAuthConsumer } from "../contexts/AuthStore";
 import FormField from "./misc/FormField";
 import countries from "../data/countries.json";
 import amadeusService from "../services/AmadeusService";
+import { Redirect } from "react-router-dom";
 
 const validations = {
   originCountry: value => {
@@ -238,7 +239,10 @@ class BuscoNew extends Component {
     event.preventDefault();
     if (this.isValid()) {
       console.log(this.state.data);
-      this.props.onSearch(this.state.data);
+      console.log(this.props);
+      // TODO
+      // this.props.onSearchTravel(this.state.data);
+      // render() { (<Redirect to="/reservo" />) }
     }
   };
 
@@ -269,7 +273,7 @@ class BuscoNew extends Component {
 
     return (
       <LayoutApp>
-        <h3 style={{ textAlign: "center" }}>Busco dónde ir</h3>
+        <h3 style={{ textAlign: "center" }}>Busco dónde ir {this.props.titulo}</h3>
         <form id="register-form" className="mt-4" onSubmit={this.handleSubmit}>
           <div className="row">
             <div className="col">
@@ -424,6 +428,7 @@ class BuscoNew extends Component {
               form="register-form"
               type="submit"
               disabled={!this.isValid()}
+              onClick={ () => <Redirect to="/reservo" /> } 
             >
               Search
             </button>

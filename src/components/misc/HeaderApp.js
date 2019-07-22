@@ -29,7 +29,7 @@ class HeaderApp extends Component {
           shape="square"
           size="large"
         /> */}
-        <Button shape="circle" icon="logout" onClick={this.handleLogout} />
+        <Button icon="logout" onClick={this.handleLogout} />
       </Header>
     );
   }

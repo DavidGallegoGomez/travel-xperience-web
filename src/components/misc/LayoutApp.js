@@ -34,7 +34,7 @@ class LayoutApp extends Component {
               <Menu.Item style={{ margin: "auto" }} key="1">
                 <Icon type="file-search" />
                 <span>Busco dónde ir</span>
-                <Link to="/busco"></Link>
+                <Link to="/busco-new"></Link>
               </Menu.Item>
               
               <Menu.Item key="2">

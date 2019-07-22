@@ -5,7 +5,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import PrivateRoute from "./guards/PrivateRoute";
 // import Road from "./components/Road";
-import Busco from "./components/busco/Busco";
+// import Busco from "./components/busco/Busco";
 import Reservo from "./components/Reservo";
 // import Preparo from "./components/Preparo";
 import Disfruto from "./components/Disfruto";
@@ -18,7 +18,9 @@ import BuscoNew from "./components/BuscoNew";
 class App extends Component {
   state = {
     collapsed: true,
-    search: {}
+    search: {
+      // originCity: 'MALAGA'
+    }
   };
 
   onSearch = (searchDetails) => {
@@ -39,7 +41,9 @@ class App extends Component {
         <Route exact path="/register" component={Register} />
         {/* <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/road" component={Road} /> */}
-        <PrivateRoute exact path="/busco" component={() => <Busco onSearch={this.onSearch}/>} />
+
+        {/* <PrivateRoute exact path="/busco" component={() => <Busco onSearch={this.onSearch}/>} /> */}
+        
         <PrivateRoute exact path="/reservo" component={() => <Reservo search={this.state.search}/>} />
         {/* <PrivateRoute exact path="/preparo" component={Preparo} /> */}
         <PrivateRoute exact path="/alojamiento" component={() => <Alojo search={this.state.search}/>} />
@@ -47,7 +51,7 @@ class App extends Component {
         {/* <PrivateRoute exact path="/recuerdo" component={Recuerdo} /> */}
         <PrivateRoute exact path="/search-cities" component={SearchCities} />
         <PrivateRoute exact path="/search" component={SearchCities2} />
-        <PrivateRoute exact path="/busco-new" component={BuscoNew} />
+        <PrivateRoute exact path="/busco-new" component={ () => <BuscoNew onSearchTravel={this.onSearch} /> } />
       </Switch>
     );
   }
