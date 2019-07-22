@@ -19,9 +19,13 @@ class HeaderApp extends Component {
     const { user } = this.props;
 
     return (
-      <Header className="header my-header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-        <div className="logo" />
+      <Header
+        className="header my-header"
+        style={{ position: "fixed", zIndex: 1, width: "100%" }}
+      >
+        {/* <div className="logo" /> */}
         <h3 style={{ color: "white" }}>Travel Xperience</h3>
+
         <h5 style={{ color: "blue" }}>Hola {user.username}!!!</h5>
         {/* <Avatar
           className="avatar"
