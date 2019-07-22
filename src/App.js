@@ -13,6 +13,7 @@ import Disfruto from "./components/Disfruto";
 import SearchCities from "./components/SearchCities";
 import SearchCities2 from "./components/SearchCities2";
 import Alojo from "./components/Alojo";
+import BuscoNew from "./components/BuscoNew";
 
 class App extends Component {
   state = {
@@ -46,6 +47,7 @@ class App extends Component {
         {/* <PrivateRoute exact path="/recuerdo" component={Recuerdo} /> */}
         <PrivateRoute exact path="/search-cities" component={SearchCities} />
         <PrivateRoute exact path="/search" component={SearchCities2} />
+        <PrivateRoute exact path="/busco-new" component={BuscoNew} />
       </Switch>
     );
   }

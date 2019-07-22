@@ -11,7 +11,8 @@ const FormField = props => {
     error,
     type,
     validationClassName,
-    disabled
+    disabled,
+    ref
   } = props;
 
   const inputAttrs = {
@@ -22,7 +23,8 @@ const FormField = props => {
     onBlur,
     onChange: onChange,
     type,
-    disabled
+    disabled,
+    ref
   };
 
   return (

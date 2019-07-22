@@ -5,6 +5,7 @@ import FormField from "../misc/FormField";
 import countries from "../../data/countries.json";
 import amadeusService from '../../services/AmadeusService';
 import BuscoDate from '../busco/misc/BuscoDate';
+import SearchCitiesOrigin from '../SearchCities2';
 
 const validations = {
   originCountry: value => {
@@ -222,66 +223,8 @@ class Busco extends Component {
       <LayoutApp>
         <h3 style={{ textAlign: "center" }}>Busco dónde ir</h3>
         <form id="register-form" className="mt-4" onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="col">
-              <div className="form-group">
-                <label>OriginCountry</label>
-                <select
-                  className={`form-control ${
-                    touch.originCountry && errors.originCountry
-                      ? "is-invalid"
-                      : ""
-                  }`}
-                  name="originCountry"
-                  onChange={this.handleChange}
-                  onBlur={this.handleBlur}
-                  value={data.originCountry}
-                >
-                  {countriesOpts}
-                </select>
-                <div className="invalid-feedback">{errors.originCountry}</div>
-              </div>
-            </div>
-            <div className="col">
-              {errors.originCountry ? (
-                <FormField
-                  disabled
-                  label="OriginCity"
-                  name="originCity"
-                  onBlur={this.handleBlur}
-                  value={data.originCity}
-                  onChange={this.handleChange}
-                  touch={touch.originCity}
-                  error={errors.originCity}
-                  type="text"
-                  validationClassName={this.getValidationClassName(
-                    "originCity"
-                  )}
-                />
-              ) : (
-                <FormField
-                  label="OriginCity"
-                  name="originCity"
-                  onBlur={this.handleBlur}
-                  value={data.originCity}
-                  // onChange={this.handleChange}
-
-                  // ref={input => (this.search = input)}
-                  onChange={this.handleInputChangeOrigin}
-
-                  touch={touch.originCity}
-                  error={errors.originCity}
-                  type="text"
-                  validationClassName={this.getValidationClassName(
-                    "originCity"
-                  )}
-                />
-
-                
-
-              )}
-            </div>
-          </div>
+          
+          <SearchCitiesOrigin onChange={this.handleChange}/>
 
           <div className="row">
             <div className="col">

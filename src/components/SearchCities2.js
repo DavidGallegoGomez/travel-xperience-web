@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import countries from "../data/countries.json";
 import amadeusService from "../services/AmadeusService";
 
-class SearchCities extends Component {
+class SearchCitiesOrigin extends Component {
   state = {
     query: {
       keyword: "",
@@ -12,6 +12,10 @@ class SearchCities extends Component {
     data: {
       originCountry: "",
       originCity: ""
+    },
+    errors: {
+      originCountry: true,
+      originCity: true
     },
     touch: {}
   };
@@ -40,19 +44,25 @@ class SearchCities extends Component {
         if (this.state.query.keyword && this.state.query.keyword.length > 2) {
           this.getInfo();
           console.log(this.state.results);
+          // this.props.onChange();
         }
       }
     );
   };
 
   handleChangeCountry = event => {
-    const { value } = event.target;
+    const { name, value } = event.target;
     this.setState({
+      data: {
+        ...this.state.data,
+        [name]: value
+      },
       query: {
         ...this.state.query,
         countryCode: value
       }
     });
+    // this.props.onChange(this.state.originCountry);
   };
 
   handleChange = event => {
@@ -67,6 +77,7 @@ class SearchCities extends Component {
         countryCode: value
       }
     });
+    // this.props.onChange(this.state.originCity);
   };
 
   handleBlur = event => {
@@ -79,8 +90,20 @@ class SearchCities extends Component {
     });
   };
 
+  getValidationClassName = attr => {
+    const { errors, touch } = this.state;
+
+    if (!touch[attr]) {
+      return "";
+    } else if (errors[attr]) {
+      return "is-invalid";
+    } else {
+      return "is-valid";
+    }
+  };
+
   render() {
-    const { data } = this.state;
+    const { errors, touch, data } = this.state;
 
     const countriesOpts = countries.map(c => (
       <option key={c.code} value={c.code.toUpperCase()}>
@@ -89,19 +112,23 @@ class SearchCities extends Component {
     ));
 
     const citiesOpts = this.state.results.map(c => (
-      <option key={c.iataCode} value={c.name}>
+      <option key={c.iataCode} value={c.address.cityCode}>
         {c.name}
       </option>
     ));
 
     return (
-      <form className="mt-4">
+      <div>
         <div className="row">
           <div className="col-4">
             <div className="form-group">
-              <label>OriginCountry</label>
+              <label>Salida (País)</label>
               <select
-                className="form-control"
+                className={`form-control ${
+                  touch.originCountry && errors.originCountry
+                    ? "is-invalid"
+                    : ""
+                }`}
                 name="originCountry"
                 onChange={this.handleChangeCountry}
                 onBlur={this.handleBlur}
@@ -109,6 +136,7 @@ class SearchCities extends Component {
               >
                 {countriesOpts}
               </select>
+              <div className="invalid-feedback">{errors.originCountry}</div>
             </div>
           </div>
         </div>
@@ -116,8 +144,11 @@ class SearchCities extends Component {
         <div className="row">
           <div className="form-group">
             <div className="col">
+              <label>Busco aeropuerto</label>
               <input
-                placeholder="Search airport..."
+                className="form-control"
+                label="Busco aeropuerto"
+                placeholder="Busco aeropuerto..."
                 ref={input => (this.search = input)}
                 onChange={this.handleInputChange}
               />
@@ -126,8 +157,11 @@ class SearchCities extends Component {
 
           <div className="col-4">
             <div className="form-group">
-              <label>OriginCity</label>
+              <label>Salida (Ciudad)</label>
               <select
+                className={`form-control ${
+                  touch.originCity && errors.originCity ? "is-invalid" : ""
+                }`}
                 name="originCity"
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
@@ -135,18 +169,19 @@ class SearchCities extends Component {
               >
                 {citiesOpts}
               </select>
+              <div className="invalid-feedback">{errors.originCity}</div>
             </div>
           </div>
         </div>
+      </div>
 
-        <p>{this.state.query.keyword}</p>
-        <p>{this.state.query.countryCode}</p>
-        <p>------------------------------</p>
-        <p>{this.state.data.originCountry}</p>
-        <p>{this.state.data.originCity}</p>
-      </form>
+      // <p>{this.state.query.keyword}</p>
+      // <p>{this.state.query.countryCode}</p>
+      // <p>------------------------------</p>
+      // <p>{this.state.data.originCountry}</p>
+      // <p>{this.state.data.originCity}</p>
     );
   }
 }
 
-export default SearchCities;
+export default SearchCitiesOrigin;
