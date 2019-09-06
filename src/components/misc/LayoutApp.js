@@ -48,8 +48,14 @@ class LayoutApp extends Component {
                 <span>Alojamiento</span>
                 <Link to="/alojamiento"></Link>
               </Menu.Item>
-              
+
               <Menu.Item key="4">
+                <Icon type="schedule" />
+                <span>Planifico actividades</span>
+                <Link to="/to-do-list"></Link>
+              </Menu.Item>
+
+              <Menu.Item key="5">
                 <Icon type="camera" />
                 <span>Disfruto en destino</span>
                 <Link to="/disfruto"></Link>

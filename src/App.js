@@ -14,6 +14,7 @@ import SearchCities from "./components/SearchCities";
 import SearchCities2 from "./components/SearchCities2";
 import Alojo from "./components/Alojo";
 import BuscoNew from "./components/BuscoNew";
+import ToDoBox from "./components/toDoList/ToDoBox";
 
 class App extends Component {
   state = {
@@ -52,6 +53,7 @@ class App extends Component {
         <PrivateRoute exact path="/search-cities" component={SearchCities} />
         <PrivateRoute exact path="/search" component={SearchCities2} />
         <PrivateRoute exact path="/busco-new" component={ () => <BuscoNew onSearchTravel={this.onSearch} /> } />
+        <PrivateRoute exact path="/to-do-list" component={ToDoBox} />
       </Switch>
     );
   }
