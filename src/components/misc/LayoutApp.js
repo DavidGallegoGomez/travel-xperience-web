@@ -60,6 +60,12 @@ class LayoutApp extends Component {
                 <span>Disfruto en destino</span>
                 <Link to="/disfruto"></Link>
               </Menu.Item>
+              
+              <Menu.Item key="6">
+                <Icon type="read" />
+                <span>Mis recuerdos</span>
+                <Link to="/memories"></Link>
+              </Menu.Item>
             
             </Menu>
           </Sider>
