@@ -97,7 +97,8 @@ class BuscoNew extends Component {
       departureDate: true,
       returnDate: true
     },
-    touch: {}
+    touch: {},
+    redirect: false
   };
   
   getInfoOrigin = () => {
@@ -240,15 +241,26 @@ class BuscoNew extends Component {
     if (this.isValid()) {
       console.log(this.state.data);
       console.log(this.props);
-      // TODO
-      // this.props.onSearchTravel(this.state.data);
-      // render() { (<Redirect to="/reservo" />) }
     }
   };
 
   isValid = () => {
     return !Object.keys(this.state.data).some(attr => this.state.errors[attr]);
   };
+
+  setRedirect = () => {
+    this.setState({ redirect: true })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      if (this.isValid()) {
+        console.log(this.state.data);
+        console.log(this.props);
+      }
+      return <Redirect to='/reservo' />
+    }
+  }
 
   render() {
     const { errors, data, touch } = this.state;
@@ -421,6 +433,7 @@ class BuscoNew extends Component {
           </div>
 
           <div className="text-center" style={{ paddingTop: "15px" }}>
+            {this.renderRedirect()}
             <button
               className={`btn ${
                 !this.isValid() ? "btn-outline-danger" : "btn-outline-primary"
@@ -428,9 +441,9 @@ class BuscoNew extends Component {
               form="register-form"
               type="submit"
               disabled={!this.isValid()}
-              onClick={ () => <Redirect to="/reservo" /> } 
+              onClick={this.setRedirect}
             >
-              Search
+              Next
             </button>
           </div>
         </form>

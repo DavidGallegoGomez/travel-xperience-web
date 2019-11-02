@@ -21,7 +21,7 @@ class App extends Component {
   state = {
     collapsed: true,
     search: {
-      // originCity: 'MALAGA'
+      originCity: 'MALAGA'
     }
   };
 
